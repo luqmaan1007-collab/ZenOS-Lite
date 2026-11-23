@@ -1,4 +1,7 @@
 name: Build ZenOS Lite
+concurrency:
+  group: zenos-lite-${{ github.ref }}
+  cancel-in-progress: true
 on:
   workflow_dispatch:
   push:
