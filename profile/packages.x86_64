@@ -1,7 +1,11 @@
 # Boot and live root (required by Archiso)
 base
 linux
-linux-firmware
+linux-firmware-intel
+linux-firmware-amdgpu
+linux-firmware-atheros
+linux-firmware-realtek
+linux-firmware-whence
 mkinitcpio
 mkinitcpio-archiso
 archiso
@@ -43,7 +47,5 @@ pavucontrol
 sudo
 nano
 less
-man-db
-man-pages
 bash-completion
 archlinux-keyring
