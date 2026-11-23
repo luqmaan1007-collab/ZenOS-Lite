@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build official Archiso profile in Arch container
+      - name: Build in Arch Linux container with host boot tools
         run: |
           docker run --privileged --rm -v "$PWD:/src" -w /src archlinux:latest bash -euxo pipefail -c '
             pacman -Syu --noconfirm
-            pacman -S --needed --noconfirm archiso
+            pacman -S --needed --noconfirm archiso grub syslinux
             chmod +x scripts/*.sh
             scripts/build-iso.sh
             scripts/check-iso.sh out/*.iso
