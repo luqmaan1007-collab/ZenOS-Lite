@@ -1,0 +1,49 @@
+# Boot and live root (required by Archiso)
+base
+linux
+linux-firmware
+mkinitcpio
+mkinitcpio-archiso
+archiso
+grub
+syslinux
+efibootmgr
+dosfstools
+mtools
+squashfs-tools
+xorriso
+
+# Desktop
+xorg-server
+xfce4
+lightdm
+lightdm-gtk-greeter
+adwaita-icon-theme
+ttf-dejavu
+firefox
+thunar
+gvfs
+file-roller
+xdg-utils
+
+# Connectivity and devices
+networkmanager
+iwd
+wireless-regdb
+bluez
+bluez-utils
+pipewire
+pipewire-alsa
+pipewire-pulse
+wireplumber
+alsa-utils
+pavucontrol
+
+# Essentials and system management
+sudo
+nano
+less
+man-db
+man-pages
+bash-completion
+archlinux-keyring
