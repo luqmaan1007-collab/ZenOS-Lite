@@ -1,0 +1,19 @@
+[Unit]
+Description=Show ZenOS boot diagnostics on the main console
+Documentation=file:/var/log/zenos-boot-diagnostics.log
+After=systemd-journald.service systemd-nsresourced.service
+Wants=systemd-journald.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/zenos-boot-diagnostics
+StandardInput=null
+StandardOutput=console
+StandardError=console
+TTYPath=/dev/console
+TTYReset=yes
+TTYVHangup=yes
+TimeoutStartSec=90
+
+[Install]
+WantedBy=multi-user.target
