@@ -16,6 +16,7 @@ squashfs-tools
 xorriso
 
 # Lightweight XFCE desktop
+dbus
 xorg-server
 xfce4-session
 xfce4-panel
