@@ -17,7 +17,11 @@ xorriso
 
 # Lightweight XFCE desktop
 dbus
+polkit
+mesa
+xf86-video-vesa
 xorg-server
+xfce4
 xfce4-session
 xfce4-panel
 xfce4-settings
