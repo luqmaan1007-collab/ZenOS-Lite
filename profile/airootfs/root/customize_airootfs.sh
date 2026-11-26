@@ -2,7 +2,7 @@
 set -euo pipefail
 
 id liveuser >/dev/null 2>&1 || useradd --create-home --groups wheel,audio,video,storage,optical --shell /bin/bash liveuser
-printf 'liveuser:zenos\\n' | chpasswd
+printf '%s\n' 'liveuser:zenos' | chpasswd
 
 chmod 0755 /usr/local/bin/zenos-boot-diagnostics
 systemctl enable NetworkManager.service
