@@ -1,31 +1,27 @@
 #!/usr/bin/env bash
 set -u
 
-# Give systemd a moment to finish the first start attempt.
-sleep 5
-
-printf '\n\n============================================================\n'
-printf '                 ZenOS boot diagnostics\n'
-printf '============================================================\n'
-printf 'Kernel: '
-uname -r
-printf '\nSystemd: '
-systemd --version | head -n 1
-printf '\n--- systemd-nsresourced.service status ---\n'
-systemctl status systemd-nsresourced.service --no-pager -l || true
-printf '\n--- Recent service journal ---\n'
-journalctl -b -u systemd-nsresourced.service --no-pager -n 60 || true
-printf '\n--- Related resource-management units ---\n'
-systemctl --no-pager --full list-units '*nsresource*' || true
-printf '\nDiagnostics are also saved to /var/log/zenos-boot-diagnostics.log\n'
-printf '============================================================\n'
-
 {
-  echo "ZenOS boot diagnostics"
+  echo "============================================================"
+  echo "ZenOS Lite boot diagnostics"
   date --iso-8601=seconds
   uname -a
-  systemd --version
+  systemd --version | head -n 1
+  echo
+  echo "--- systemd-modules-load.service ---"
+  systemctl status systemd-modules-load.service --no-pager -l || true
+  echo
+  echo "--- systemd-journald.service ---"
+  systemctl status systemd-journald.service --no-pager -l || true
+  echo
+  echo "--- systemd-nsresourced.service ---"
   systemctl status systemd-nsresourced.service --no-pager -l || true
-  journalctl -b -u systemd-nsresourced.service --no-pager -n 100 || true
-  systemctl --no-pager --full list-units '*nsresource*' || true
-} > /var/log/zenos-boot-diagnostics.log 2>&1
+  echo
+  echo "--- Boot errors (priority 3) ---"
+  journalctl -b -p err --no-pager -n 60 || true
+  echo
+  echo "--- Module-load journal ---"
+  journalctl -b -u systemd-modules-load.service --no-pager -n 40 || true
+  echo "Full report: /var/log/zenos-boot-diagnostics.log"
+  echo "============================================================"
+} 2>&1 | tee /var/log/zenos-boot-diagnostics.log
