@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=ZenOS XFCE
+Comment=ZenOS desktop session with a private D-Bus session bus
+Exec=dbus-run-session -- startxfce4
+TryExec=dbus-run-session
+Type=Application
+DesktopNames=XFCE
