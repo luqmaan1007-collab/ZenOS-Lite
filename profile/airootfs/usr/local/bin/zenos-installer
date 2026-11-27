@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $EUID -ne 0 ]]; then
+  exec sudo "$0" "$@"
+fi
+if ! command -v archinstall >/dev/null 2>&1; then
+  echo "ZenOS Installer requires archinstall. Install it with: sudo pacman -S archinstall" >&2
+  exit 1
+fi
+cat <<'EOF'
+ZenOS Installer
+---------------
+This opens Arch Linux's guided installer. It will ask you to select the
+installation disk, partition layout, bootloader, user account and profile.
+Choose the XFCE desktop profile and review every disk/formatting choice
+before confirming. Disk formatting permanently erases the selected disk.
+EOF
+exec archinstall
