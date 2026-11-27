@@ -21,6 +21,7 @@ polkit
 mesa
 xf86-video-vesa
 xorg-server
+xorg-xinit
 xfce4
 xfce4-session
 xfce4-panel
@@ -29,8 +30,6 @@ xfwm4
 xfdesktop
 xfce4-terminal
 thunar
-lightdm
-lightdm-gtk-greeter
 adwaita-icon-theme
 ttf-dejavu
 firefox
