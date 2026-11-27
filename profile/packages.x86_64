@@ -22,7 +22,13 @@ mesa
 xf86-video-vesa
 xorg-server
 xorg-xinit
-xfce4
+exo
+garcon
+thunar-volman
+tumbler
+xfce4-appfinder
+xfce4-power-manager
+xfconf
 xfce4-session
 xfce4-panel
 xfce4-settings
@@ -49,7 +55,6 @@ alsa-utils
 
 # Installer and essential administration
 archinstall
-whiptail
 sudo
 nano
 less
