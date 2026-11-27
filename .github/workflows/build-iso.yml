@@ -15,7 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build in Arch Linux container with host boot tools
+      - name: Validate installer and package profile
+        run: |
+          grep -qx 'archinstall' profile/packages.x86_64
+          ! grep -qx 'whiptail' profile/packages.x86_64
+          ! grep -qx 'xfce4' profile/packages.x86_64
+          test -f profile/airootfs/etc/skel/Desktop/Install-ZenOS.desktop
+      - name: Build ISO in Arch Linux container
         run: |
           docker run --privileged --rm -v "$PWD:/src" -w /src archlinux:latest bash -euxo pipefail -c '
             pacman -Syu --noconfirm
@@ -24,15 +30,20 @@ jobs:
             scripts/build-iso.sh
             scripts/check-iso.sh out/*.iso
           '
-      - name: Create USB image copy
+      - name: Package ISO, USB image and installer in one workflow
         run: |
           ISO="$(find out -maxdepth 1 -type f -name '*.iso' -print -quit)"
           test -n "$ISO"
           cp "$ISO" out/zenos-lite-usb.img
+          cp profile/airootfs/usr/local/bin/zenos-installer out/zenos-installer.sh
+          chmod +x out/zenos-installer.sh
+          sha256sum "$ISO" out/zenos-lite-usb.img out/zenos-installer.sh > out/SHA256SUMS
       - uses: actions/upload-artifact@v4
         with:
           name: zenos-lite-install-media
           path: |
             out/*.iso
             out/zenos-lite-usb.img
+            out/zenos-installer.sh
+            out/SHA256SUMS
           if-no-files-found: error
