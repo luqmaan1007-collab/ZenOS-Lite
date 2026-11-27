@@ -1,4 +1,4 @@
-# Start the ZenOS graphical session automatically on the first virtual console.
-if [[ -z "${DISPLAY:-}" && "${XDG_VTNR:-}" == "1" ]]; then
+# Start the ZenOS XFCE desktop only on the first local virtual terminal.
+if [[ -z "${DISPLAY:-}" && "$(tty 2>/dev/null)" == "/dev/tty1" ]]; then
   exec startx
 fi
