@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Install ZenOS
+Comment=Install ZenOS to a computer
+Exec=xfce4-terminal --command=sudo\ /usr/local/bin/zenos-installer
+Icon=system-software-install
+Terminal=false
+Categories=System;
