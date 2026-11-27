@@ -24,8 +24,15 @@ jobs:
             scripts/build-iso.sh
             scripts/check-iso.sh out/*.iso
           '
+      - name: Create USB image copy
+        run: |
+          ISO="$(find out -maxdepth 1 -type f -name '*.iso' -print -quit)"
+          test -n "$ISO"
+          cp "$ISO" out/zenos-lite-usb.img
       - uses: actions/upload-artifact@v4
         with:
-          name: zenos-lite-x86_64-iso
-          path: out/*.iso
+          name: zenos-lite-install-media
+          path: |
+            out/*.iso
+            out/zenos-lite-usb.img
           if-no-files-found: error
