@@ -47,7 +47,9 @@ pipewire-pulse
 wireplumber
 alsa-utils
 
-# Essential administration
+# Installer and essential administration
+archinstall
+whiptail
 sudo
 nano
 less
